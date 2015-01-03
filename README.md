@@ -4,6 +4,8 @@ shell matrix
 :point_right: 在命令行控制台上，实现模拟生成黑客帝国中的`Matrix`字符效果。  
 ＃ `Matrix`效果在命令行控制台上现在还不能显示成**3D**的 :joy:
 
+![matrix](matrix.jpg "matrix")
+
 [matrix.sh](matrix.sh)
 ----------------------------
 
@@ -25,7 +27,7 @@ $ ./matrix.sh
 
 
 ```bash
-$ ps -ef | grep '[m]atrix.sh' | awk '{print $2}' | xargs kill -9
+$ ps -ef | grep '[m]atrix\.sh' | awk '{print $2}' | xargs kill -9
 ```
 
 #### 恢复光标
@@ -37,7 +39,7 @@ $ tput cnorm -- normal
 还需要的改进
 ----------------------------
 
-- 模拟效果一般
+- 模拟效果一般，只实现了**最基本**的模拟。
 - 比较耗`CPU`  
     显示30列的`Matrix`，在我的4核`MBP`上的`CPU`使用率达到了`50%`。  
     详细原因后续再分析。
@@ -45,4 +47,4 @@ $ tput cnorm -- normal
 想法来源
 ----------------------------
 
-想法来自`kexploit`同学，且提供了[完整可运行的脚本](cloudsec-matrix.sh)。
+想法来自[wzt](https://github.com/cloudsec)同学，且提供了[完整可运行的脚本](cloudsec-matrix.sh)。
