@@ -73,11 +73,12 @@ function show_cursor() {
 
 # How to move the cursor around the screen:
 # http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x361.html
+# use 0-based coordinate (row, col)
 function print_at() {
     local row_num="$1"
     local col_num="$2"
     local content="$3"
-    echo -ne "\033[${row_num};${col_num}H$content"
+    echo -ne "\033[$((row_num + 1));$((col_num + 1))H$content"
 }
 
 
@@ -95,7 +96,7 @@ function print_character_to_column() {
     eval "local row_num_of_column=\$(($var_name_of_row_num_of_column++ % ROWS))"
 
     if [ $row_num_of_column -eq 0 ]; then
-        local max_row_num=$(get_random_num_with_bound $ROWS)
+        local max_row_num=$(get_random_num_with_bound $((ROWS + 1)) )
         # set global var(like max_row_of_column_12)
         eval "$var_name_of_max_row_of_column=$max_row_num"
     fi
@@ -111,12 +112,12 @@ function print_character_to_column() {
         sleep 0.01
     fi
 
-    print_at $((row_num_of_column + 1)) $col_num "$char"
+    print_at $row_num_of_column $col_num "$char"
 }
 
 function print_matrix() {
     local col_num
-    for ((col_num = 0; col_num <= COLUMNS; col_num++)); do
+    for ((col_num = 0; col_num < COLUMNS; col_num++)); do
         # print each column in a separate subprocess
         while true; do
             print_character_to_column $col_num
