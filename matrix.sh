@@ -6,8 +6,18 @@
 #   Jerry Lee (github.com/oldratlee)
 #   wzt (github.com/cloudsec)
 
-readonly COLUMNS=${COLUMNS:-30}
-readonly ROWS=${ROWS:-25}
+set_stty_col_and_row() {
+    # get COLUMNS and ROWS by stty size
+    local stty_size="$(stty size)"
+    local col_num="$(echo $stty_size | awk '{print $2}')"
+    local row_num="$(echo $stty_size | awk '{print $1}')"
+    COLUMNS=${col_num:-30}
+    ROWS=${row_num:-25}
+
+    # use small size because of performance problem
+    COLUMNS=30
+}
+set_stty_col_and_row
 
 
 #######################################
