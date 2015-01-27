@@ -27,7 +27,7 @@ $ ./matrix.sh
 
 
 ```bash
-$ ps -ef | grep '[m]atrix\.sh' | awk '{print $2}' | xargs kill -9
+$ ps -ef | awk '/[m]atrix\.sh/{print $2}' | xargs kill -9
 ```
 
 #### 恢复光标
